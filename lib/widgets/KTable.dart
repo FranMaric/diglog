@@ -24,8 +24,18 @@ class KTable extends StatelessWidget {
 
     List<int> stateDecode = stateDecoder(xVar, yVar);
 
-    double cellWidth = 25.0 * (xVar + .2) / 2.2;
-    double cellHeight = 25.0 * (xVar + .2) / 2.2;
+    double cellWidth;
+    double cellHeight;
+
+    switch (xVar) {
+      case 1:
+        cellWidth = 25.0;
+        cellHeight = 25.0;
+        break;
+      default:
+        cellWidth = 25.0 * (xVar + .2) / 2.2;
+        cellHeight = 25.0 * (xVar + .2) / 2.2;
+    }
 
     if (states.length < x * y) {
       print("There aren't enough states!");

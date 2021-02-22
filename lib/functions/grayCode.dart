@@ -1,6 +1,6 @@
 List<String> grayCode(int n) {
-  if (n == 2) {
-    return ["00", "01", "11", "10"];
+  if (n == 1) {
+    return ["0", "1"];
   }
   List<String> codes = [];
   List<String> tempCodes = grayCode(n - 1);

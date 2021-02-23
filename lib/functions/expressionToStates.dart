@@ -48,7 +48,3 @@ String replaceOperators(String expression) {
 
   return expression;
 }
-
-main() {
-  expressionToStates("not a and b");
-}

@@ -44,10 +44,11 @@ List<String> varNamesFromExpression(String expression) {
 
   for (int i = 0; i < expression.length; i++) {
     if (expression[i] == ";" || i == expression.length - 1) {
-      if (i == expression.length - 1)
-        varName = expression.substring(start);
-      else
+      if (i == expression.length - 1 && expression[i] != ";")
+        varName = expression.substring(start, i + 1);
+      else {
         varName = expression.substring(start, i);
+      }
 
       if (RegExp(r'^[a-zA-Z]+$').hasMatch(varName) &&
           !varNames.contains(varName)) {

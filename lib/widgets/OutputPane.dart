@@ -13,6 +13,8 @@ class OutputPane extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (variableNames == null || states == null) return Container();
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [

@@ -5,11 +5,11 @@ import 'dart:math';
 import 'package:diglog/functions/grayCode.dart';
 import 'package:diglog/functions/stateDecoder.dart';
 
-class KTable extends StatelessWidget {
+class OutputKTable extends StatelessWidget {
   final List<String> variableNames;
   final List<int> states;
 
-  KTable({this.variableNames, this.states});
+  OutputKTable({this.variableNames, this.states});
 
   @override
   Widget build(BuildContext context) {

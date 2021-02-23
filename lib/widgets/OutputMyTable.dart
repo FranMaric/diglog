@@ -6,11 +6,11 @@ import 'package:diglog/functions/intToBinaryString.dart';
 double cellWidth = 25.0;
 double cellHeight = 18.0;
 
-class MyTable extends StatelessWidget {
+class OutputMyTable extends StatelessWidget {
   final List<String> variableNames;
   final List<int> states;
 
-  MyTable({this.variableNames, this.states});
+  OutputMyTable({this.variableNames, this.states});
 
   @override
   Widget build(BuildContext context) {

@@ -50,7 +50,7 @@ List<String> varNamesFromExpression(String expression) {
         varName = expression.substring(start, i);
       }
 
-      if (RegExp(r'^[a-zA-Z]+$').hasMatch(varName) &&
+      if (RegExp(r'^[a-zA-Z0-9]+$').hasMatch(varName) &&
           !varNames.contains(varName)) {
         varNames.add(varName);
       }

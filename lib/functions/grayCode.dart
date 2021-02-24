@@ -1,4 +1,5 @@
 List<String> grayCode(int n) {
+  if (n == 0 || n == null) return []; //Null safety!
   if (n == 1) {
     return ["0", "1"];
   }

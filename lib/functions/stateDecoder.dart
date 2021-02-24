@@ -2,6 +2,7 @@ import 'package:diglog/functions/binaryStringToInt.dart';
 import 'package:diglog/functions/grayCode.dart';
 
 List<int> stateDecoder(int x, int y) {
+  if (y == 0) return [0, 1];
   List<int> states = [];
 
   List<String> xList = grayCode(x);

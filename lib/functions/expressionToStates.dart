@@ -18,12 +18,36 @@ List<int> expressionToStates(String expression) {
   expression = expression.replaceAll(" ", "");
   expression = replaceOperators(expression);
 
+  List<int> varNamesOrder = List.generate(varNames.length, (i) => i);
+
+  String tempString;
+  int tempInt;
+  bool sorted = false;
+  while (!sorted) {
+    sorted = true;
+    for (int i = 0; i < varNames.length - 1; i++) {
+      if (varNames[i].length < varNames[i + 1].length) {
+        tempString = varNames[i];
+        varNames[i] = varNames[i + 1];
+        varNames[i + 1] = tempString;
+
+        tempInt = varNamesOrder[i];
+        varNamesOrder[i] = varNamesOrder[i + 1];
+        varNamesOrder[i + 1] = tempInt;
+        sorted = false;
+      }
+    }
+  }
+  varNames = varNamesFromExpression(expression);
+  print([varNames, varNamesOrder]);
+
   for (int i = 0; i < pow(2, varNames.length); i++) {
     state = intToBinaryString(i, varNames.length);
     tempExpression = expression;
 
     for (int j = 0; j < varNames.length; j++) {
-      tempExpression = tempExpression.replaceAll(varNames[j], state[j]);
+      tempExpression = tempExpression.replaceAll(
+          varNames[varNamesOrder[j]], state[varNamesOrder[j]]);
     }
     states.add(evaluate(tempExpression));
   }

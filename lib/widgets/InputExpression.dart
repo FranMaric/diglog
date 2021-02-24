@@ -4,12 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:diglog/functions/expressionToStates.dart';
 import 'package:diglog/functions/varNamesFromExpression.dart';
 
-class InputBoolean extends StatelessWidget {
+class InputExpression extends StatelessWidget {
   final Function changeState;
   final Function submitState;
   final String valid;
 
-  InputBoolean({this.changeState, this.submitState, this.valid});
+  InputExpression({this.changeState, this.submitState, this.valid});
 
   void handleChange(String expression) {
     changeState(expressionToStates(expression),

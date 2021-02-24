@@ -19,7 +19,9 @@ int evaluate(String expression) {
       depth--;
     }
   }
-  if (depth != 0) print("Paranthesis are messed up!");
+  if (depth != 0) {
+    return -1;
+  }
 
   //Evaluate each depth=1 paranthesis seperately = recursion - uuuuu fancy
   for (int i = 0; i < paranthesis.length / 2; i++) {

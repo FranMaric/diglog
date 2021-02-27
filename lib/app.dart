@@ -34,14 +34,7 @@ class App extends StatelessWidget {
                 child: InputPane(),
               ),
               Expanded(
-                child: Column(
-                  children: [
-                    OutputPane(
-                      varNames: ["A", "B", "C"],
-                      states: [0, 0, 1, 0, 1, 0, 0, 0],
-                    ),
-                  ],
-                ),
+                child: OutputPane(),
               ),
             ],
           ),

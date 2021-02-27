@@ -5,38 +5,42 @@ import 'package:diglog/widgets/OutputKTable.dart';
 import 'package:diglog/widgets/OutputMyTable.dart';
 import 'package:diglog/widgets/OutputExpression.dart';
 
+//Provider
+import 'package:provider/provider.dart';
+import 'package:diglog/appState.dart';
+
 class OutputPane extends StatelessWidget {
-  final List<String> varNames;
-  final List<int> states;
-
-  OutputPane({this.varNames, this.states});
-
   @override
   Widget build(BuildContext context) {
-    if (varNames == null || states == null) return Container();
+    AppState appState = Provider.of<AppState>(context);
+
+    if (appState.varNames == null ||
+        appState.states == null ||
+        appState.varNames.length == 0) return Container();
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: OutputExpression(
-            states: states,
-            varNames: varNames,
+            states: appState.states,
+            varNames: appState.varNames,
           ),
         ),
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: OutputKTable(
-            states: states,
-            varNames: varNames,
+            states: appState.states,
+            varNames: appState.varNames,
           ),
         ),
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: OutputMyTable(
-            states: states,
-            varNames: varNames,
+            states: appState.states,
+            varNames: appState.varNames,
           ),
         ),
       ],

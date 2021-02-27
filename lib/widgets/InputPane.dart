@@ -1,9 +1,11 @@
+import 'package:diglog/appState.dart';
 import 'package:flutter/material.dart';
 
 //Widgets
 import 'package:diglog/widgets/InputExpression.dart';
 import 'package:diglog/widgets/InputKTable.dart';
 import 'package:diglog/widgets/InputMyTable.dart';
+import 'package:provider/provider.dart';
 
 enum typeEnum { expression, ktable, table }
 
@@ -111,9 +113,8 @@ class _InputPaneState extends State<InputPane> {
         Align(
           alignment: Alignment.centerRight,
           child: OutlinedButton(
-            onPressed: () {
-              print("Calculate"); // ADD calculate funcionality
-            },
+            onPressed: () =>
+                Provider.of<AppState>(context, listen: false).submitStates(),
             child: Text(
               "Calculate",
             ),

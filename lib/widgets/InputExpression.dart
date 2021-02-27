@@ -1,30 +1,21 @@
 import 'package:flutter/material.dart';
 
-//Functions
-import 'package:diglog/functions/expressionToStates.dart';
-import 'package:diglog/functions/varNamesFromExpression.dart';
+//Provider
+import 'package:provider/provider.dart';
+import 'package:diglog/appState.dart';
 
 class InputExpression extends StatelessWidget {
-  final Function changeState;
-  final Function submitState;
-  final String valid;
-
-  InputExpression({this.changeState, this.submitState, this.valid});
-
-  void handleChange(String expression) {
-    changeState(expressionToStates(expression),
-        varNamesFromExpression(expression), expression);
-  }
-
   @override
   Widget build(BuildContext context) {
     return TextField(
-      onChanged: handleChange,
-      onSubmitted: submitState,
+      onChanged: (e) =>
+          Provider.of<AppState>(context, listen: false).setExpression(e),
+      onSubmitted: (e) =>
+          Provider.of<AppState>(context, listen: false).submitStates(),
       cursorColor: Colors.blue[400],
       decoration: InputDecoration(
-        hintText: "A + B*C",
-        errorText: valid,
+        hintText: "A + B * not C",
+        errorText: Provider.of<AppState>(context).valid,
         fillColor: Colors.white,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(5.0),

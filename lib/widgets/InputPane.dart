@@ -7,7 +7,7 @@ import 'package:diglog/widgets/InputKTable.dart';
 import 'package:diglog/widgets/InputMyTable.dart';
 import 'package:provider/provider.dart';
 
-enum typeEnum { expression, ktable, table }
+enum typeEnum { expression, ktable, table } //ENUM
 
 class InputPane extends StatefulWidget {
   @override
@@ -15,26 +15,17 @@ class InputPane extends StatefulWidget {
 }
 
 class _InputPaneState extends State<InputPane> {
-  typeEnum inputType = typeEnum.expression;
-
-  int variables = 2;
-
-  List<int> states;
+  typeEnum inputType = typeEnum.expression; //default input type
 
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Padding(
-          padding: const EdgeInsets.fromLTRB(10, 5, 0, 5),
-          child: Text(
-            "Choose input:",
-          ),
-        ),
+        SizedBox(height: 10),
         Row(
           children: [
-            SizedBox(width: 10),
+            SizedBox(width: 20),
             OutlinedButton(
               onPressed: () {
                 setState(() {
@@ -42,13 +33,16 @@ class _InputPaneState extends State<InputPane> {
                 });
               },
               child: Text(
-                "Boolean",
+                "Expression",
               ),
             ),
             SizedBox(width: 10),
             OutlinedButton(
               onPressed: () {
                 setState(() {
+                  if (inputType == typeEnum.expression)
+                    Provider.of<AppState>(context, listen: false)
+                        .setDefaultValues();
                   inputType = typeEnum.ktable;
                 });
               },
@@ -60,6 +54,9 @@ class _InputPaneState extends State<InputPane> {
             OutlinedButton(
               onPressed: () {
                 setState(() {
+                  if (inputType == typeEnum.expression)
+                    Provider.of<AppState>(context, listen: false)
+                        .setDefaultValues();
                   inputType = typeEnum.table;
                 });
               },
@@ -72,7 +69,11 @@ class _InputPaneState extends State<InputPane> {
             SizedBox(width: 10),
             OutlinedButton(
               onPressed: () {
-                print("RESET"); // ADD reset functionality
+                if (inputType == typeEnum.expression)
+                  Provider.of<AppState>(context, listen: false).reset();
+                else
+                  Provider.of<AppState>(context, listen: false)
+                      .setDefaultValues();
               },
               child: Text(
                 "Reset",
@@ -85,20 +86,22 @@ class _InputPaneState extends State<InputPane> {
             ? Row(
                 children: [
                   SizedBox(width: 10),
-                  Text(variables.toString() + " variables"),
+                  Text(Provider.of<AppState>(context)
+                          .varNames
+                          .length
+                          .toString() +
+                      " variables"),
                   SizedBox(width: 10),
                   RoundIconButton(
                     icon: Icons.exposure_minus_1,
-                    onTap: () => setState(() {
-                      if (variables > 2) variables--;
-                    }),
+                    onTap: () => Provider.of<AppState>(context, listen: false)
+                        .decrementVarCount(),
                   ),
                   SizedBox(width: 10),
                   RoundIconButton(
                     icon: Icons.plus_one,
-                    onTap: () => setState(() {
-                      if (variables < 10) variables++;
-                    }),
+                    onTap: () => Provider.of<AppState>(context, listen: false)
+                        .incrementVarCount(),
                   ),
                   SizedBox(width: 10),
                 ],
@@ -110,16 +113,18 @@ class _InputPaneState extends State<InputPane> {
               ? InputExpression()
               : (inputType == typeEnum.ktable ? InputKTable() : InputMyTable()),
         ),
-        Align(
-          alignment: Alignment.centerRight,
-          child: OutlinedButton(
-            onPressed: () =>
-                Provider.of<AppState>(context, listen: false).submitStates(),
-            child: Text(
-              "Calculate",
-            ),
-          ),
-        )
+        inputType == typeEnum.expression
+            ? Align(
+                alignment: Alignment.centerRight,
+                child: OutlinedButton(
+                  onPressed: () => Provider.of<AppState>(context, listen: false)
+                      .submitStates(),
+                  child: Text(
+                    "Calculate",
+                  ),
+                ),
+              )
+            : Container(),
       ],
     );
   }

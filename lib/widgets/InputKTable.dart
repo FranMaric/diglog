@@ -5,16 +5,17 @@ import 'dart:math';
 import 'package:diglog/functions/grayCode.dart';
 import 'package:diglog/functions/stateDecoder.dart';
 
+//Provider
+import 'package:provider/provider.dart';
+import 'package:diglog/appState.dart';
+
 class InputKTable extends StatelessWidget {
-  final List<String> variableNames;
-  final List<int> states;
-
-  InputKTable({this.variableNames, this.states});
-
   @override
   Widget build(BuildContext context) {
-    int xVar = (variableNames.length / 2).ceil();
-    int yVar = variableNames.length - xVar;
+    final AppState appState = Provider.of<AppState>(context);
+
+    int xVar = (appState.varNames.length / 2).ceil();
+    int yVar = appState.varNames.length - xVar;
 
     int x = pow(2, xVar);
     int y = pow(2, yVar);
@@ -37,22 +38,18 @@ class InputKTable extends StatelessWidget {
         cellHeight = 25.0 * (xVar + .2) / 2.2;
     }
 
-    if (states.length < x * y) {
-      print("There aren't enough states!");
-    }
-
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
             padding: EdgeInsets.only(top: 15),
-            child: Text(variableNames.sublist(xVar).join())),
+            child: Text(appState.varNames.sublist(xVar).join())),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
               padding: EdgeInsets.only(left: 3),
-              child: Text(variableNames.sublist(0, xVar).join()),
+              child: Text(appState.varNames.sublist(0, xVar).join()),
             ),
             SizedBox(
               height: cellHeight,
@@ -97,9 +94,12 @@ class InputKTable extends StatelessWidget {
                   child: GridView.count(
                     crossAxisCount: x,
                     children: List.generate(
-                      states.length,
+                      appState.states.length,
                       (index) => KTableCell(
-                        state: states[stateDecode[index]],
+                        state: appState.states[stateDecode[index]],
+                        onTap: () =>
+                            Provider.of<AppState>(context, listen: false)
+                                .updateState(stateDecode[index]),
                       ),
                     ),
                   ),
@@ -115,15 +115,16 @@ class InputKTable extends StatelessWidget {
 
 class KTableCell extends StatelessWidget {
   final int state;
+  final Function onTap;
 
-  KTableCell({this.state});
+  KTableCell({this.state, this.onTap});
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return InkWell(
+      onTap: onTap,
       child: Container(
         decoration: BoxDecoration(
-          color: Colors.white,
           border: Border.all(
             width: 0.5,
             color: Colors.black,

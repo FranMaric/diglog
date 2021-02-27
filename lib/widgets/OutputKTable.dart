@@ -40,7 +40,6 @@ class OutputKTable extends StatelessWidget {
     if (states.length < x * (y == 0 ? 1 : y)) {
       print("There aren't enough states!");
     }
-    print([varNames, states]);
 
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,

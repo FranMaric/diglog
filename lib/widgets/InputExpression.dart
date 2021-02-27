@@ -8,6 +8,7 @@ class InputExpression extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextField(
+      controller: Provider.of<AppState>(context).controller,
       onChanged: (e) =>
           Provider.of<AppState>(context, listen: false).setExpression(e),
       onSubmitted: (e) =>

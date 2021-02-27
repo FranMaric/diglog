@@ -5,12 +5,12 @@ import 'package:diglog/widgets/InputExpression.dart';
 import 'package:diglog/widgets/InputKTable.dart';
 import 'package:diglog/widgets/InputMyTable.dart';
 
-class InputSelector extends StatefulWidget {
+class InputPane extends StatefulWidget {
   @override
-  _InputSelectorState createState() => _InputSelectorState();
+  _InputPaneState createState() => _InputPaneState();
 }
 
-class _InputSelectorState extends State<InputSelector> {
+class _InputPaneState extends State<InputPane> {
   int inputType = 0;
   // 0 - Boolean
   // 1 - KTable

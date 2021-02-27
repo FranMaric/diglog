@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 //Widgets
-import 'package:diglog/widgets/InputSelector.dart';
+import 'package:diglog/widgets/InputPane.dart';
 import 'package:diglog/widgets/OutputPane.dart';
 
 class App extends StatelessWidget {
@@ -31,7 +31,7 @@ class App extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Expanded(
-                child: InputSelector(),
+                child: InputPane(),
               ),
               Expanded(
                 child: Column(

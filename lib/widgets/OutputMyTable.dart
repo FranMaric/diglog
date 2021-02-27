@@ -7,26 +7,26 @@ double cellWidth = 25.0;
 double cellHeight = 18.0;
 
 class OutputMyTable extends StatelessWidget {
-  final List<String> variableNames;
+  final List<String> varNames;
   final List<int> states;
 
-  OutputMyTable({this.variableNames, this.states});
+  OutputMyTable({this.varNames, this.states});
 
   @override
   Widget build(BuildContext context) {
-    List<List<String>> columns = List.generate(variableNames.length, (i) => []);
+    List<List<String>> columns = List.generate(varNames.length, (i) => []);
 
     for (int i = 0; i < states.length; i++) {
-      String row = intToBinaryString(i, variableNames.length);
-      for (int j = 0; j < variableNames.length; j++) columns[j].add(row[j]);
+      String row = intToBinaryString(i, varNames.length);
+      for (int j = 0; j < varNames.length; j++) columns[j].add(row[j]);
     }
     return Row(
       children: List.generate(
-        variableNames.length,
+        varNames.length,
         (index) => MyColumn(
           states: columns[index],
           addLeftBoundry: index == 0,
-          varName: variableNames[index],
+          varName: varNames[index],
         ),
       )..add(
           MyColumn(

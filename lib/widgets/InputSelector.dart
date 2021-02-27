@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 //Widgets
-import 'package:diglog/widgets/InputBoolean.dart';
+import 'package:diglog/widgets/InputExpression.dart';
 import 'package:diglog/widgets/InputKTable.dart';
 import 'package:diglog/widgets/InputMyTable.dart';
 
@@ -106,7 +106,7 @@ class _InputSelectorState extends State<InputSelector> {
         Padding(
           padding: const EdgeInsets.all(20),
           child: inputType == 0
-              ? InputBoolean()
+              ? InputExpression()
               : (inputType == 1 ? InputKTable() : InputMyTable()),
         ),
         Align(

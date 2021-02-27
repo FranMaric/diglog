@@ -5,16 +5,15 @@ import 'package:diglog/widgets/InputExpression.dart';
 import 'package:diglog/widgets/InputKTable.dart';
 import 'package:diglog/widgets/InputMyTable.dart';
 
+enum typeEnum { expression, ktable, table }
+
 class InputPane extends StatefulWidget {
   @override
   _InputPaneState createState() => _InputPaneState();
 }
 
 class _InputPaneState extends State<InputPane> {
-  int inputType = 0;
-  // 0 - Boolean
-  // 1 - KTable
-  // 2 - Table
+  typeEnum inputType = typeEnum.expression;
 
   int variables = 2;
 
@@ -37,7 +36,7 @@ class _InputPaneState extends State<InputPane> {
             OutlinedButton(
               onPressed: () {
                 setState(() {
-                  inputType = 0;
+                  inputType = typeEnum.expression;
                 });
               },
               child: Text(
@@ -48,7 +47,7 @@ class _InputPaneState extends State<InputPane> {
             OutlinedButton(
               onPressed: () {
                 setState(() {
-                  inputType = 1;
+                  inputType = typeEnum.ktable;
                 });
               },
               child: Text(
@@ -59,7 +58,7 @@ class _InputPaneState extends State<InputPane> {
             OutlinedButton(
               onPressed: () {
                 setState(() {
-                  inputType = 2;
+                  inputType = typeEnum.table;
                 });
               },
               child: Text(
@@ -80,7 +79,7 @@ class _InputPaneState extends State<InputPane> {
           ],
         ),
         SizedBox(height: 7),
-        (inputType == 1 || inputType == 2)
+        (inputType == typeEnum.ktable || inputType == typeEnum.table)
             ? Row(
                 children: [
                   SizedBox(width: 10),
@@ -105,9 +104,9 @@ class _InputPaneState extends State<InputPane> {
             : Container(),
         Padding(
           padding: const EdgeInsets.all(20),
-          child: inputType == 0
+          child: inputType == typeEnum.expression
               ? InputExpression()
-              : (inputType == 1 ? InputKTable() : InputMyTable()),
+              : (inputType == typeEnum.ktable ? InputKTable() : InputMyTable()),
         ),
         Align(
           alignment: Alignment.centerRight,

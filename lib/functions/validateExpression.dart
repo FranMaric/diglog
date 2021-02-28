@@ -34,7 +34,7 @@ String validateExpression(String expression) {
   int depth = 0;
   for (int i = 0; i < expression.length; i++) {
     if (!(operators +
-            "QWERTZUIOPŠĐŠŽASDFGHJKLČĆYXCVBNMqwertzuiopšđžasdfghjklčćyxycvbnm "
+            "QWERTZUIOPŠĐŠŽASDFGHJKLČĆYXCVBNMqwertzuiopšđžasdfghjklčćyxycvbnm0123456789 "
                 .split(""))
         .contains(expression[i])) {
       return "Variable names can contain only letters and numbers.";

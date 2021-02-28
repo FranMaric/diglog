@@ -1,5 +1,3 @@
-import 'package:diglog/functions/varNamesFromExpression.dart';
-
 const List<String> operators = [
   // literal
   "NOT",

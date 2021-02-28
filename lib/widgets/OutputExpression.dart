@@ -1,3 +1,4 @@
+import 'package:diglog/functions/statesToExpression.dart';
 import 'package:flutter/material.dart';
 
 class OutputExpression extends StatelessWidget {
@@ -8,6 +9,12 @@ class OutputExpression extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    String expression = statesToExpression(states, varNames);
+
+    return Container(
+      child: Text(
+        expression,
+      ),
+    );
   }
 }

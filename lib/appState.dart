@@ -63,7 +63,7 @@ class AppState extends ChangeNotifier {
   }
 
   void incrementVarCount() {
-    if (_varNames.length > 7) return;
+    if (_varNames.length > 5) return;
 
     _states = _states + List.generate(_states.length, (i) => 0);
     _varNames = "ABCDEFGIJ".split("").sublist(0, _varNames.length + 1);

@@ -36,6 +36,8 @@ String statesToExpression(List<int> states, List<String> varNames) {
   String expression = "";
   String implicant;
 
+  implicants =implicants .reversed.toList();
+
   for (int i = 0; i < implicants.length; i++) {
     implicant = "";
     for (int j = 0; j < varNames.length; j++) {
@@ -66,8 +68,8 @@ List<List<String>> eliminate(List<List<String>> groups) {
 
   List<List<bool>> reduced = List.generate(
       groups.length, (i) => List.generate(groups[i].length, (index) => false));
-  
-  for (int i = 0; i < groups.length-1; i++) {
+
+  for (int i = 0; i < groups.length - 1; i++) {
     for (int j = 0; j < groups[i].length; j++) {
       for (int k = 0; k < groups[i + 1].length; k++) {
         if (diff(groups[i][j], groups[i + 1][k]) == 1) {
@@ -119,15 +121,4 @@ int diff(String exp1, String exp2) {
   int counter = 0;
   for (int i = 0; i < exp1.length; i++) if (exp1[i] != exp2[i]) counter++;
   return counter;
-}
-
-main() {
-  String expression = "A+B";
-  dynamic states = statesFromExpression(expression);
-  dynamic varNames = varNamesFromExpression(expression);
-
-  // print(states);
-  // print(varNames);
-
-  print(statesToExpression(states, varNames));
 }

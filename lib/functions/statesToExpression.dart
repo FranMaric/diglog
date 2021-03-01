@@ -66,8 +66,8 @@ List<List<String>> eliminate(List<List<String>> groups) {
 
   List<List<bool>> reduced = List.generate(
       groups.length, (i) => List.generate(groups[i].length, (index) => false));
-
-  for (int i = 0; i < groups.length; i++) {
+  
+  for (int i = 0; i < groups.length-1; i++) {
     for (int j = 0; j < groups[i].length; j++) {
       for (int k = 0; k < groups[i + 1].length; k++) {
         if (diff(groups[i][j], groups[i + 1][k]) == 1) {

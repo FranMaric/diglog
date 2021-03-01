@@ -36,7 +36,8 @@ String statesToExpression(List<int> states, List<String> varNames) {
   String expression = "";
   String implicant;
 
-  implicants =implicants .reversed.toList();
+  implicants = implicants.toSet().toList();
+  implicants = implicants.reversed.toList();
 
   for (int i = 0; i < implicants.length; i++) {
     implicant = "";

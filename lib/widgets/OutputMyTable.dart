@@ -21,6 +21,7 @@ class OutputMyTable extends StatelessWidget {
       for (int j = 0; j < varNames.length; j++) columns[j].add(row[j]);
     }
     return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: List.generate(
         varNames.length,
         (index) => MyColumn(

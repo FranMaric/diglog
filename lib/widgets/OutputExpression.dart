@@ -13,7 +13,10 @@ class OutputExpression extends StatelessWidget {
 
     return Container(
       child: Text(
-        expression,
+        "Minimized: " + expression,
+        style: TextStyle(
+          fontSize: 18,
+        ),
       ),
     );
   }

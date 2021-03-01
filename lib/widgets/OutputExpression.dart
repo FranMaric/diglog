@@ -12,6 +12,15 @@ class OutputExpression extends StatelessWidget {
     String expression = statesToExpression(states, varNames);
 
     return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.all(Radius.circular(10.0)),
+        color: Colors.white70,
+        border: Border.all(
+          color: Colors.black,
+          width: 1,
+        ),
+      ),
+      padding: EdgeInsets.all(10.0),
       child: Text(
         "Minimized: " + expression,
         style: TextStyle(

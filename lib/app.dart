@@ -28,17 +28,29 @@ class App extends StatelessWidget {
               height: 1,
               color: Colors.black,
             ),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Expanded(
-                  child: InputPane(),
-                ),
-                Expanded(
-                  child: OutputPane(),
-                ),
-              ],
-            ),
+            LayoutBuilder(
+                builder: (BuildContext context, BoxConstraints constraints) {
+              if (constraints.maxWidth > 680)
+                return Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Expanded(
+                      child: InputPane(),
+                    ),
+                    Expanded(
+                      child: OutputPane(),
+                    ),
+                  ],
+                );
+              else
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    InputPane(),
+                    OutputPane(),
+                  ],
+                );
+            }),
           ],
         ),
       ),

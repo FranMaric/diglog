@@ -16,7 +16,8 @@ class OutputPane extends StatelessWidget {
 
     if (appState.varNames == null ||
         appState.states == null ||
-        appState.varNames.length == 0) return Container();
+        appState.varNames.length == 0 ||
+        appState.states.length == 0) return Container();
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -29,18 +30,24 @@ class OutputPane extends StatelessWidget {
             varNames: appState.varNames,
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: OutputKTable(
-            states: appState.states,
-            varNames: appState.varNames,
+        Visibility(
+          visible: appState.type != typeEnum.ktable,
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: OutputKTable(
+              states: appState.states,
+              varNames: appState.varNames,
+            ),
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: OutputMyTable(
-            states: appState.states,
-            varNames: appState.varNames,
+        Visibility(
+          visible: appState.type != typeEnum.table,
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: OutputMyTable(
+              states: appState.states,
+              varNames: appState.varNames,
+            ),
           ),
         ),
       ],

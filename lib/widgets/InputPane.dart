@@ -1,13 +1,13 @@
-import 'package:diglog/appState.dart';
 import 'package:flutter/material.dart';
 
 //Widgets
 import 'package:diglog/widgets/InputExpression.dart';
 import 'package:diglog/widgets/InputKTable.dart';
 import 'package:diglog/widgets/InputMyTable.dart';
-import 'package:provider/provider.dart';
 
-enum typeEnum { expression, ktable, table } //ENUM
+//Provider
+import 'package:provider/provider.dart';
+import 'package:diglog/appState.dart';
 
 class InputPane extends StatefulWidget {
   @override
@@ -31,6 +31,8 @@ class _InputPaneState extends State<InputPane> {
                 setState(() {
                   inputType = typeEnum.expression;
                 });
+                Provider.of<AppState>(context, listen: false)
+                    .setCurrentInputType(typeEnum.expression);
               },
               child: Text(
                 "Expression",
@@ -44,6 +46,8 @@ class _InputPaneState extends State<InputPane> {
                     Provider.of<AppState>(context, listen: false)
                         .setDefaultValues();
                   inputType = typeEnum.ktable;
+                  Provider.of<AppState>(context, listen: false)
+                      .setCurrentInputType(typeEnum.ktable);
                 });
               },
               child: Text(
@@ -58,6 +62,8 @@ class _InputPaneState extends State<InputPane> {
                     Provider.of<AppState>(context, listen: false)
                         .setDefaultValues();
                   inputType = typeEnum.table;
+                  Provider.of<AppState>(context, listen: false)
+                      .setCurrentInputType(typeEnum.table);
                 });
               },
               child: Text(

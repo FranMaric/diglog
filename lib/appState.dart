@@ -7,6 +7,8 @@ import 'package:diglog/functions/statesFromExpression.dart';
 import 'package:diglog/functions/varNamesFromExpression.dart';
 import 'package:diglog/functions/statesToExpression.dart';
 
+enum typeEnum { expression, ktable, table } //ENUM
+
 class AppState extends ChangeNotifier {
   List<String> _varNames = ["A", "B", "C"];
   List<int> _states = [0, 0, 1, 0, 1, 1, 1, 1]; //A + B * not C
@@ -15,12 +17,15 @@ class AppState extends ChangeNotifier {
   bool _expressionChanged = true;
   String _valid;
 
+  typeEnum _type = typeEnum.expression;
+
   TextEditingController controller = TextEditingController();
 
   //Getters
   get varNames => _varNames;
   get states => _states;
   get valid => _valid;
+  get type => _type;
 
   //Functions
   void setExpression(String e) {
@@ -85,6 +90,11 @@ class AppState extends ChangeNotifier {
 
     _states = _states.sublist(0, (_states.length / 2).floor());
     _varNames = "ABCDEFGIJ".split("").sublist(0, _varNames.length - 1);
+    notifyListeners();
+  }
+
+  void setCurrentInputType(typeEnum newType) {
+    _type = newType;
     notifyListeners();
   }
 }

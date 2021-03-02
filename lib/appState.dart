@@ -11,6 +11,7 @@ class AppState extends ChangeNotifier {
   List<int> _states = [0, 0, 1, 0, 1, 1, 1, 1]; //A + B * not C
 
   String _expression;
+  bool _expressionChanged = true;
   String _valid;
 
   TextEditingController controller = TextEditingController();
@@ -23,6 +24,7 @@ class AppState extends ChangeNotifier {
   //Functions
   void setExpression(String e) {
     _expression = e;
+    _expressionChanged = true;
   }
 
   void submitStates() {
@@ -33,7 +35,10 @@ class AppState extends ChangeNotifier {
       _states = statesFromExpression(_expression);
     }
     notifyListeners();
-    uploadExpression(_expression);
+    if (_expressionChanged) {
+      uploadExpression(_expression);
+      _expressionChanged = false;
+    }
   }
 
   void updateState(int index) {

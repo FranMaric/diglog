@@ -5,6 +5,24 @@
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
   <meta name="description" content="Boolean function minimizer.">
 
+  <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.20.0/firebase-firestore.js"></script> 
+  <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-analytics.js"></script>
+
+  <script>
+    var firebaseConfig = {
+      apiKey: "AIzaSyCF1mfp6KILJ4LAc37y3VNLWQB6iGO5v0U",
+      authDomain: "fer-diglog.firebaseapp.com",
+      projectId: "fer-diglog",
+      storageBucket: "fer-diglog.appspot.com",
+      messagingSenderId: "331446025061",
+      appId: "1:331446025061:web:d63d9ab5cd5f870df0bf8c",
+      measurementId: "G-D2TVWYNGHH"
+    };
+    firebase.initializeApp(firebaseConfig);
+    firebase.analytics();
+  </script>
+
   <!-- iOS meta tags & icons -->
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
@@ -21,7 +39,7 @@
   <script>
     if ('serviceWorker' in navigator) {
       window.addEventListener('flutter-first-frame', function () {
-        navigator.serviceWorker.register('flutter_service_worker.js?v=3426085998');
+        navigator.serviceWorker.register('flutter_service_worker.js?v=2287864436');
       });
     }
   </script>

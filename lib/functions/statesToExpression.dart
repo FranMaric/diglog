@@ -1,6 +1,4 @@
 import 'package:diglog/functions/intToBinaryString.dart';
-import 'package:diglog/functions/statesFromExpression.dart';
-import 'package:diglog/functions/varNamesFromExpression.dart';
 
 String statesToExpression(List<int> states, List<String> varNames) {
   int sum = states.fold(0, (p, c) => p + c);

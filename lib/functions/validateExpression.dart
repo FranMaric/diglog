@@ -10,6 +10,7 @@ const List<String> operators = [
   "!",
   "+",
   "*",
+  "×",
   // Logical
   "¬",
   "ˇ",

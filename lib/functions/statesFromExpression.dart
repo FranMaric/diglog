@@ -7,7 +7,7 @@ import 'package:diglog/functions/varNamesFromExpression.dart';
 
 const List<String> not = ["NOT", "not", "!", "¬", "~"];
 const List<String> or = ["OR", "or", "+", "ˇ", "||"];
-const List<String> and = ["AND", "and", "*", "^", "&&"];
+const List<String> and = ["AND", "and", "*", "^", "&&", "×"];
 
 List<int> statesFromExpression(String expression) {
   List<String> varNames = varNamesFromExpression(expression);

@@ -40,6 +40,7 @@ class InputKTable extends StatelessWidget {
 
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Padding(
             padding: EdgeInsets.only(top: 15),

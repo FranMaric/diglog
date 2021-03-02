@@ -23,6 +23,7 @@ class InputMyTable extends StatelessWidget {
       for (int j = 0; j < appState.varNames.length; j++) columns[j].add(row[j]);
     }
     return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: List.generate(
         appState.varNames.length,
         (index) => MyColumn(

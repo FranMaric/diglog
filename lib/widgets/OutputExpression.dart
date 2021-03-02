@@ -1,5 +1,7 @@
-import 'package:diglog/functions/statesToExpression.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+
+import 'package:diglog/functions/statesToExpression.dart';
 
 class OutputExpression extends StatelessWidget {
   final List<String> varNames;
@@ -20,12 +22,34 @@ class OutputExpression extends StatelessWidget {
           width: 1,
         ),
       ),
-      padding: EdgeInsets.all(10.0),
-      child: Text(
-        "Minimized: " + expression,
-        style: TextStyle(
-          fontSize: 18,
-        ),
+      padding: EdgeInsets.only(left: 12, right: 3),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(
+            expression,
+            style: TextStyle(
+              fontSize: 18,
+            ),
+          ),
+          SizedBox(width: 12.0),
+          Container(
+            width: 1,
+            height: 55,
+            color: Colors.black,
+          ),
+          IconButton(
+            icon: Icon(Icons.copy),
+            onPressed: () {
+              Clipboard.setData(ClipboardData(text: expression));
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text('Copied to Clipboard'),
+                ),
+              );
+            },
+          )
+        ],
       ),
     );
   }

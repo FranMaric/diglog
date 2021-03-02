@@ -5,6 +5,7 @@ import 'firestore_service.dart';
 import 'package:diglog/functions/validateExpression.dart';
 import 'package:diglog/functions/statesFromExpression.dart';
 import 'package:diglog/functions/varNamesFromExpression.dart';
+import 'package:diglog/functions/statesToExpression.dart';
 
 class AppState extends ChangeNotifier {
   List<String> _varNames = ["A", "B", "C"];
@@ -38,7 +39,7 @@ class AppState extends ChangeNotifier {
     if (_expressionChanged &&
         _expression != "" &&
         _expression.replaceAll(" ", "") != "") {
-      uploadExpression(_expression);
+      uploadExpression(_expression, statesToExpression(_states, _varNames));
       _expressionChanged = false;
     }
   }

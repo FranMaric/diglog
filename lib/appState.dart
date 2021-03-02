@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'firestore_service.dart';
 
 //Function
 import 'package:diglog/functions/validateExpression.dart';
@@ -32,6 +33,7 @@ class AppState extends ChangeNotifier {
       _states = statesFromExpression(_expression);
     }
     notifyListeners();
+    uploadExpression(_expression);
   }
 
   void updateState(int index) {

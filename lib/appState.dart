@@ -35,7 +35,9 @@ class AppState extends ChangeNotifier {
       _states = statesFromExpression(_expression);
     }
     notifyListeners();
-    if (_expressionChanged) {
+    if (_expressionChanged &&
+        _expression != "" &&
+        _expression.replaceAll(" ", "") != "") {
       uploadExpression(_expression);
       _expressionChanged = false;
     }

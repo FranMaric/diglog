@@ -114,8 +114,9 @@ class _InputPaneState extends State<InputPane> {
               : (inputType == typeEnum.ktable ? InputKTable() : InputMyTable()),
         ),
         inputType == typeEnum.expression
-            ? Align(
+            ? Container(
                 alignment: Alignment.centerRight,
+                padding: EdgeInsets.only(right: 20),
                 child: OutlinedButton(
                   onPressed: () => Provider.of<AppState>(context, listen: false)
                       .submitStates(),

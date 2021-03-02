@@ -91,7 +91,7 @@ class _InputPaneState extends State<InputPane> {
         (inputType == typeEnum.ktable || inputType == typeEnum.table)
             ? Row(
                 children: [
-                  SizedBox(width: 10),
+                  SizedBox(width: 25),
                   Text(Provider.of<AppState>(context)
                           .varNames
                           .length

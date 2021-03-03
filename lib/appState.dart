@@ -17,7 +17,7 @@ class AppState extends ChangeNotifier {
   bool _expressionChanged = true;
   String _valid;
 
-  typeEnum _type = typeEnum.expression;
+  typeEnum _inputType = typeEnum.expression;
 
   TextEditingController controller = TextEditingController();
 
@@ -25,7 +25,7 @@ class AppState extends ChangeNotifier {
   get varNames => _varNames;
   get states => _states;
   get valid => _valid;
-  get type => _type;
+  get inputType => _inputType;
 
   //Functions
   void setExpression(String e) {
@@ -94,7 +94,7 @@ class AppState extends ChangeNotifier {
   }
 
   void setCurrentInputType(typeEnum newType) {
-    _type = newType;
+    _inputType = newType;
     notifyListeners();
   }
 }

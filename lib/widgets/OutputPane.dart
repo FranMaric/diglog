@@ -31,7 +31,7 @@ class OutputPane extends StatelessWidget {
           ),
         ),
         Visibility(
-          visible: appState.type != typeEnum.ktable,
+          visible: appState.inputType != typeEnum.ktable,
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: OutputKTable(
@@ -41,7 +41,7 @@ class OutputPane extends StatelessWidget {
           ),
         ),
         Visibility(
-          visible: appState.type != typeEnum.table,
+          visible: appState.inputType != typeEnum.table,
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: OutputMyTable(

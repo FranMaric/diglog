@@ -1,6 +1,8 @@
 import 'package:diglog/functions/intToBinaryString.dart';
+import 'package:diglog/appState.dart' show expressionType;
 
-String statesToExpression(List<int> states, List<String> varNames) {
+String statesToExpression(List<int> states, List<String> varNames,
+    expressionType _and, expressionType _or, expressionType _not) {
   int sum = states.fold(0, (p, c) => p + c);
   if (sum == states.length)
     return "1";
@@ -37,19 +39,52 @@ String statesToExpression(List<int> states, List<String> varNames) {
   implicants = implicants.toSet().toList();
   implicants = implicants.reversed.toList();
 
+  //Ugly code incoming sorry, couldn't find a better way :(
+  List<int> index = [];
+
+  if (_and == expressionType.literal)
+    index.add(0);
+  else if (_and == expressionType.algebraic)
+    index.add(1);
+  else if (_and == expressionType.logical)
+    index.add(2);
+  else if (_and == expressionType.programming) index.add(3);
+
+  if (_or == expressionType.literal)
+    index.add(0);
+  else if (_or == expressionType.algebraic)
+    index.add(1);
+  else if (_or == expressionType.logical)
+    index.add(2);
+  else if (_or == expressionType.programming) index.add(3);
+
+  if (_not == expressionType.literal)
+    index.add(0);
+  else if (_not == expressionType.algebraic)
+    index.add(1);
+  else if (_not == expressionType.logical)
+    index.add(2);
+  else if (_not == expressionType.programming) index.add(3);
+
+  String and = [" and ", "*", "^", " && "][index[0]];
+  String or = [" or ", "+", "ˇ", " || "][index[1]];
+  String not = [" not ", "!", "¬", "~"][index[2]];
+
+  //Done with ugly code, sorry you had to see that
+
   for (int i = 0; i < implicants.length; i++) {
     implicant = "";
     for (int j = 0; j < varNames.length; j++) {
       if (implicants[i][j] == "0") {
-        implicant += "!" +
+        implicant += not +
             varNames[j] +
-            (shouldAddMultiplication(implicants[i], j) ? "*" : "");
+            (shouldAddMultiplication(implicants[i], j) ? and : "");
       } else if (implicants[i][j] == "1") {
         implicant += varNames[j] +
-            (shouldAddMultiplication(implicants[i], j) ? "*" : "");
+            (shouldAddMultiplication(implicants[i], j) ? and : "");
       }
     }
-    expression += implicant + (i != (implicants.length - 1) ? "+" : "");
+    expression += implicant + (i != (implicants.length - 1) ? or : "");
   }
 
   return expression;

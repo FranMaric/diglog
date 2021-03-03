@@ -8,6 +8,7 @@ import 'package:diglog/functions/varNamesFromExpression.dart';
 import 'package:diglog/functions/statesToExpression.dart';
 
 enum typeEnum { expression, ktable, table } //ENUM
+enum expressionType { literal, algebraic, logical, programming }
 
 class AppState extends ChangeNotifier {
   List<String> _varNames = ["A", "B", "C"];
@@ -19,6 +20,10 @@ class AppState extends ChangeNotifier {
 
   typeEnum _inputType = typeEnum.expression;
 
+  expressionType _and = expressionType.programming;
+  expressionType _or = expressionType.programming;
+  expressionType _not = expressionType.programming;
+
   TextEditingController controller = TextEditingController();
 
   //Getters
@@ -26,6 +31,10 @@ class AppState extends ChangeNotifier {
   get states => _states;
   get valid => _valid;
   get inputType => _inputType;
+
+  get and => _and;
+  get or => _or;
+  get not => _not;
 
   //Functions
   void setExpression(String e) {
@@ -44,7 +53,8 @@ class AppState extends ChangeNotifier {
     if (_expressionChanged &&
         _expression != "" &&
         _expression.replaceAll(" ", "") != "") {
-      uploadExpression(_expression, statesToExpression(_states, _varNames));
+      uploadExpression(
+          _expression, statesToExpression(_states, _varNames, _and, _or, _not));
       _expressionChanged = false;
     }
   }
@@ -95,6 +105,14 @@ class AppState extends ChangeNotifier {
 
   void setCurrentInputType(typeEnum newType) {
     _inputType = newType;
+    notifyListeners();
+  }
+
+  void setCurrentOutputType(
+      {expressionType newAnd, expressionType newOr, expressionType newNot}) {
+    if (newAnd != null) _and = newAnd;
+    if (newOr != null) _or = newOr;
+    if (newNot != null) _not = newNot;
     notifyListeners();
   }
 }

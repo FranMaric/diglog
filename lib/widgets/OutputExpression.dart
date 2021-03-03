@@ -7,11 +7,15 @@ class OutputExpression extends StatelessWidget {
   final List<String> varNames;
   final List<int> states;
 
-  OutputExpression({this.varNames, this.states});
+  final and;
+  final or;
+  final not;
+
+  OutputExpression({this.varNames, this.states, this.and, this.or, this.not});
 
   @override
   Widget build(BuildContext context) {
-    String expression = statesToExpression(states, varNames);
+    String expression = statesToExpression(states, varNames, and, or, not);
 
     return Container(
       decoration: BoxDecoration(

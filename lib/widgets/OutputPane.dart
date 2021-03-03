@@ -14,6 +14,10 @@ class OutputPane extends StatelessWidget {
   Widget build(BuildContext context) {
     AppState appState = Provider.of<AppState>(context);
 
+    expressionType and = appState.and;
+    expressionType or = appState.or;
+    expressionType not = appState.not;
+
     if (appState.varNames == null ||
         appState.states == null ||
         appState.varNames.length == 0 ||
@@ -28,6 +32,9 @@ class OutputPane extends StatelessWidget {
           child: OutputExpression(
             states: appState.states,
             varNames: appState.varNames,
+            and: and,
+            or: or,
+            not: not,
           ),
         ),
         Visibility(

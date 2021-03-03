@@ -3,56 +3,44 @@ import 'package:flutter/material.dart';
 //Widgets
 import 'package:diglog/widgets/InputPane.dart';
 import 'package:diglog/widgets/OutputPane.dart';
+import 'package:diglog/widgets/MyDrawer.dart';
 
 class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: MyDrawer(),
+      appBar: AppBar(
+        title: Text(
+          "Boolean function minimizer",
+        ),
+        centerTitle: true,
+      ),
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Center(
-              child: Padding(
-                padding: const EdgeInsets.all(30.0),
-                child: Text(
-                  "Function minimizer",
-                  style: TextStyle(
-                    fontSize: 25,
-                    fontFamily: "Roboto",
-                  ),
+        child: LayoutBuilder(
+            builder: (BuildContext context, BoxConstraints constraints) {
+          if (constraints.maxWidth > 680)
+            return Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Expanded(
+                  child: InputPane(),
                 ),
-              ),
-            ),
-            Container(
-              height: 1,
-              color: Colors.black,
-            ),
-            LayoutBuilder(
-                builder: (BuildContext context, BoxConstraints constraints) {
-              if (constraints.maxWidth > 680)
-                return Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Expanded(
-                      child: InputPane(),
-                    ),
-                    Expanded(
-                      child: OutputPane(),
-                    ),
-                  ],
-                );
-              else
-                return Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    InputPane(),
-                    OutputPane(),
-                  ],
-                );
-            }),
-          ],
-        ),
+                Expanded(
+                  child: OutputPane(),
+                ),
+              ],
+            );
+          else
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                InputPane(),
+                OutputPane(),
+              ],
+            );
+        }),
       ),
     );
   }

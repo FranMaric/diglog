@@ -7,7 +7,7 @@ import 'package:diglog/functions/stateDecoder.dart';
 
 //Provider
 import 'package:provider/provider.dart';
-import 'package:diglog/appState.dart';
+import 'package:diglog/services/appState.dart';
 
 class InputKTable extends StatelessWidget {
   @override

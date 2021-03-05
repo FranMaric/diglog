@@ -1,5 +1,5 @@
 import 'package:diglog/functions/intToBinaryString.dart';
-import 'package:diglog/appState.dart' show expressionType;
+import 'package:diglog/services/appState.dart' show expressionType;
 
 const Map<expressionType, int> expressionTypeToIndex = {
   expressionType.literal: 0,

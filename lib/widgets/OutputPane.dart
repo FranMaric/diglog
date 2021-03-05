@@ -7,7 +7,7 @@ import 'package:diglog/widgets/OutputExpression.dart';
 
 //Provider
 import 'package:provider/provider.dart';
-import 'package:diglog/appState.dart';
+import 'package:diglog/services/appState.dart';
 
 class OutputPane extends StatelessWidget {
   @override

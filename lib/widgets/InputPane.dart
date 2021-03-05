@@ -7,7 +7,7 @@ import 'package:diglog/widgets/InputMyTable.dart';
 
 //Provider
 import 'package:provider/provider.dart';
-import 'package:diglog/appState.dart';
+import 'package:diglog/services/appState.dart';
 
 class InputPane extends StatefulWidget {
   @override

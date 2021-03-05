@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'firestore_service.dart';
+import 'package:diglog/services/cookieManager.dart';
 
 //Function
 import 'package:diglog/functions/validateExpression.dart';
 import 'package:diglog/functions/statesFromExpression.dart';
 import 'package:diglog/functions/varNamesFromExpression.dart';
 import 'package:diglog/functions/statesToExpression.dart';
-// ignore: avoid_web_libraries_in_flutter
-import 'dart:html';
 
 enum typeEnum { expression, ktable, table } //ENUM
 enum expressionType { literal, algebraic, logical, programming }
@@ -57,16 +56,19 @@ class AppState extends ChangeNotifier {
   AppState() {
     try {
       _and = stringToEnum[CookieManager.getCookie("and")];
+      if (_and == null) _and = defaultExpression;
     } catch (e) {
       _and = defaultExpression;
     }
     try {
       _or = stringToEnum[CookieManager.getCookie("or")];
+      if (_or == null) _or = defaultExpression;
     } catch (e) {
       _or = defaultExpression;
     }
     try {
       _not = stringToEnum[CookieManager.getCookie("not")];
+      if (_not == null) _not = defaultExpression;
     } catch (e) {
       _not = defaultExpression;
     }
@@ -76,6 +78,9 @@ class AppState extends ChangeNotifier {
   void setExpression(String e) {
     _expression = e;
     _expressionChanged = true;
+    print(_and);
+    print(_or);
+    print(_not);
   }
 
   void submitStates() {
@@ -159,27 +164,5 @@ class AppState extends ChangeNotifier {
       CookieManager.addToCookie("not", enumToString[newNot]);
     }
     notifyListeners();
-  }
-}
-
-class CookieManager {
-  static addToCookie(String key, String value) {
-    document.cookie = "$key=$value; max-age=9999999999; path=/;";
-  }
-
-  static String getCookie(String key) {
-    String cookies = document.cookie;
-    List<String> listValues = cookies.isNotEmpty ? cookies.split(";") : [];
-    String matchVal = "";
-    for (int i = 0; i < listValues.length; i++) {
-      List<String> map = listValues[i].split("=");
-      String _key = map[0].trim();
-      String _val = map[1].trim();
-      if (key == _key) {
-        matchVal = _val;
-        break;
-      }
-    }
-    return matchVal;
   }
 }

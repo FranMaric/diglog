@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 //Provider
 import 'package:provider/provider.dart';
-import 'package:diglog/appState.dart';
+import 'package:diglog/services/appState.dart';
 
 class MyDrawer extends StatelessWidget {
   @override

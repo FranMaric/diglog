@@ -5,7 +5,7 @@ import 'package:diglog/functions/intToBinaryString.dart';
 
 //Provider
 import 'package:provider/provider.dart';
-import 'package:diglog/appState.dart';
+import 'package:diglog/services/appState.dart';
 
 double cellWidth = 25.0;
 double cellHeight = 18.0;

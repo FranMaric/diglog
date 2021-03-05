@@ -6,9 +6,26 @@ import 'package:diglog/functions/validateExpression.dart';
 import 'package:diglog/functions/statesFromExpression.dart';
 import 'package:diglog/functions/varNamesFromExpression.dart';
 import 'package:diglog/functions/statesToExpression.dart';
+// ignore: avoid_web_libraries_in_flutter
+import 'dart:html';
 
 enum typeEnum { expression, ktable, table } //ENUM
 enum expressionType { literal, algebraic, logical, programming }
+
+Map<String, expressionType> stringToEnum = {
+  "literal": expressionType.literal,
+  "algebraic": expressionType.algebraic,
+  "logical": expressionType.logical,
+  "programming": expressionType.programming
+};
+Map<expressionType, String> enumToString = {
+  expressionType.literal: "literal",
+  expressionType.algebraic: "algebraic",
+  expressionType.logical: "logical",
+  expressionType.programming: "programming"
+};
+
+const expressionType defaultExpression = expressionType.algebraic;
 
 class AppState extends ChangeNotifier {
   List<String> _varNames = ["A", "B", "C"];
@@ -20,9 +37,9 @@ class AppState extends ChangeNotifier {
 
   typeEnum _inputType = typeEnum.expression;
 
-  expressionType _and = expressionType.programming;
-  expressionType _or = expressionType.programming;
-  expressionType _not = expressionType.programming;
+  expressionType _and;
+  expressionType _or;
+  expressionType _not;
 
   TextEditingController controller = TextEditingController();
 
@@ -35,6 +52,25 @@ class AppState extends ChangeNotifier {
   get and => _and;
   get or => _or;
   get not => _not;
+
+  //Startup function
+  AppState() {
+    try {
+      _and = stringToEnum[CookieManager.getCookie("and")];
+    } catch (e) {
+      _and = defaultExpression;
+    }
+    try {
+      _or = stringToEnum[CookieManager.getCookie("or")];
+    } catch (e) {
+      _or = defaultExpression;
+    }
+    try {
+      _not = stringToEnum[CookieManager.getCookie("not")];
+    } catch (e) {
+      _not = defaultExpression;
+    }
+  }
 
   //Functions
   void setExpression(String e) {
@@ -110,9 +146,40 @@ class AppState extends ChangeNotifier {
 
   void setCurrentOutputType(
       {expressionType newAnd, expressionType newOr, expressionType newNot}) {
-    if (newAnd != null) _and = newAnd;
-    if (newOr != null) _or = newOr;
-    if (newNot != null) _not = newNot;
+    if (newAnd != null) {
+      _and = newAnd;
+      CookieManager.addToCookie("and", enumToString[newAnd]);
+    }
+    if (newOr != null) {
+      _or = newOr;
+      CookieManager.addToCookie("or", enumToString[newOr]);
+    }
+    if (newNot != null) {
+      _not = newNot;
+      CookieManager.addToCookie("not", enumToString[newNot]);
+    }
     notifyListeners();
+  }
+}
+
+class CookieManager {
+  static addToCookie(String key, String value) {
+    document.cookie = "$key=$value; max-age=9999999999; path=/;";
+  }
+
+  static String getCookie(String key) {
+    String cookies = document.cookie;
+    List<String> listValues = cookies.isNotEmpty ? cookies.split(";") : [];
+    String matchVal = "";
+    for (int i = 0; i < listValues.length; i++) {
+      List<String> map = listValues[i].split("=");
+      String _key = map[0].trim();
+      String _val = map[1].trim();
+      if (key == _key) {
+        matchVal = _val;
+        break;
+      }
+    }
+    return matchVal;
   }
 }

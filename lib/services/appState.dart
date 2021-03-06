@@ -78,9 +78,6 @@ class AppState extends ChangeNotifier {
   void setExpression(String e) {
     _expression = e;
     _expressionChanged = true;
-    print(_and);
-    print(_or);
-    print(_not);
   }
 
   void submitStates() {

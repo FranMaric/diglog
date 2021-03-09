@@ -23,131 +23,151 @@ class MyDrawer extends StatelessWidget {
     return Drawer(
       child: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Table(
-          defaultColumnWidth: IntrinsicColumnWidth(),
-          border: TableBorder.symmetric(
-            inside: BorderSide(width: 0.8, color: Colors.blue),
-          ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
           children: [
-            MyTableRow(
-                title: "Literal",
-                titles: ["and", "or", "not"],
-                highlight: highlightRow == 0,
-                highlights: [
-                  appState.and == expressionType.literal,
-                  appState.or == expressionType.literal,
-                  appState.not == expressionType.literal,
-                ],
-                onBigTap: () {
-                  Provider.of<AppState>(context, listen: false)
-                      .setCurrentOutputType(
-                          newAnd: expressionType.literal,
-                          newNot: expressionType.literal,
-                          newOr: expressionType.literal);
-                  Navigator.of(context).pop();
-                },
-                onSmallTap: (int i) {
-                  if (i == 0) {
-                    Provider.of<AppState>(context, listen: false)
-                        .setCurrentOutputType(newAnd: expressionType.literal);
-                  } else if (i == 1) {
-                    Provider.of<AppState>(context, listen: false)
-                        .setCurrentOutputType(newOr: expressionType.literal);
-                  } else if (i == 2) {
-                    Provider.of<AppState>(context, listen: false)
-                        .setCurrentOutputType(newNot: expressionType.literal);
-                  }
-                }),
-            MyTableRow(
-                title: "Algebraic",
-                titles: ["*", "+", "!"],
-                highlight: highlightRow == 1,
-                highlights: [
-                  appState.and == expressionType.algebraic,
-                  appState.or == expressionType.algebraic,
-                  appState.not == expressionType.algebraic,
-                ],
-                onBigTap: () {
-                  Provider.of<AppState>(context, listen: false)
-                      .setCurrentOutputType(
-                          newAnd: expressionType.algebraic,
-                          newNot: expressionType.algebraic,
-                          newOr: expressionType.algebraic);
-                  Navigator.of(context).pop();
-                },
-                onSmallTap: (int i) {
-                  if (i == 0) {
-                    Provider.of<AppState>(context, listen: false)
-                        .setCurrentOutputType(newAnd: expressionType.algebraic);
-                  } else if (i == 1) {
-                    Provider.of<AppState>(context, listen: false)
-                        .setCurrentOutputType(newOr: expressionType.algebraic);
-                  } else if (i == 2) {
-                    Provider.of<AppState>(context, listen: false)
-                        .setCurrentOutputType(newNot: expressionType.algebraic);
-                  }
-                }),
-            MyTableRow(
-                title: "Logical",
-                titles: ["^", "ˇ", "¬"],
-                highlight: highlightRow == 2,
-                highlights: [
-                  appState.and == expressionType.logical,
-                  appState.or == expressionType.logical,
-                  appState.not == expressionType.logical,
-                ],
-                onBigTap: () {
-                  Provider.of<AppState>(context, listen: false)
-                      .setCurrentOutputType(
-                          newAnd: expressionType.logical,
-                          newNot: expressionType.logical,
-                          newOr: expressionType.logical);
-                  Navigator.of(context).pop();
-                },
-                onSmallTap: (int i) {
-                  if (i == 0) {
-                    Provider.of<AppState>(context, listen: false)
-                        .setCurrentOutputType(newAnd: expressionType.logical);
-                  } else if (i == 1) {
-                    Provider.of<AppState>(context, listen: false)
-                        .setCurrentOutputType(newOr: expressionType.logical);
-                  } else if (i == 2) {
-                    Provider.of<AppState>(context, listen: false)
-                        .setCurrentOutputType(newNot: expressionType.logical);
-                  }
-                }),
-            MyTableRow(
-                title: "Programming",
-                titles: ["&&", "||", "~"],
-                highlight: highlightRow == 3,
-                highlights: [
-                  appState.and == expressionType.programming,
-                  appState.or == expressionType.programming,
-                  appState.not == expressionType.programming,
-                ],
-                onBigTap: () {
-                  Provider.of<AppState>(context, listen: false)
-                      .setCurrentOutputType(
-                          newAnd: expressionType.programming,
-                          newNot: expressionType.programming,
-                          newOr: expressionType.programming);
-                  Navigator.of(context).pop();
-                },
-                onSmallTap: (int i) {
-                  if (i == 0) {
-                    Provider.of<AppState>(context, listen: false)
-                        .setCurrentOutputType(
-                            newAnd: expressionType.programming);
-                  } else if (i == 1) {
-                    Provider.of<AppState>(context, listen: false)
-                        .setCurrentOutputType(
-                            newOr: expressionType.programming);
-                  } else if (i == 2) {
-                    Provider.of<AppState>(context, listen: false)
-                        .setCurrentOutputType(
-                            newNot: expressionType.programming);
-                  }
-                }),
+            Container(
+              padding: EdgeInsets.all(5.0),
+              child: Text(
+                "Customize output:",
+              ),
+            ),
+            Table(
+              // defaultColumnWidth: IntrinsicColumnWidth(),
+              columnWidths: {
+                0: IntrinsicColumnWidth(),
+              },
+              border: TableBorder.symmetric(
+                inside: BorderSide(width: 0.8, color: Colors.blue),
+              ),
+              children: [
+                MyTableRow(
+                    title: "Literal",
+                    titles: ["and", "or", "not"],
+                    highlight: highlightRow == 0,
+                    highlights: [
+                      appState.and == expressionType.literal,
+                      appState.or == expressionType.literal,
+                      appState.not == expressionType.literal,
+                    ],
+                    onBigTap: () {
+                      Provider.of<AppState>(context, listen: false)
+                          .setCurrentOutputType(
+                              newAnd: expressionType.literal,
+                              newNot: expressionType.literal,
+                              newOr: expressionType.literal);
+                    },
+                    onSmallTap: (int i) {
+                      if (i == 0) {
+                        Provider.of<AppState>(context, listen: false)
+                            .setCurrentOutputType(
+                                newAnd: expressionType.literal);
+                      } else if (i == 1) {
+                        Provider.of<AppState>(context, listen: false)
+                            .setCurrentOutputType(
+                                newOr: expressionType.literal);
+                      } else if (i == 2) {
+                        Provider.of<AppState>(context, listen: false)
+                            .setCurrentOutputType(
+                                newNot: expressionType.literal);
+                      }
+                    }),
+                MyTableRow(
+                    title: "Algebraic",
+                    titles: ["*", "+", "!"],
+                    highlight: highlightRow == 1,
+                    highlights: [
+                      appState.and == expressionType.algebraic,
+                      appState.or == expressionType.algebraic,
+                      appState.not == expressionType.algebraic,
+                    ],
+                    onBigTap: () {
+                      Provider.of<AppState>(context, listen: false)
+                          .setCurrentOutputType(
+                              newAnd: expressionType.algebraic,
+                              newNot: expressionType.algebraic,
+                              newOr: expressionType.algebraic);
+                    },
+                    onSmallTap: (int i) {
+                      if (i == 0) {
+                        Provider.of<AppState>(context, listen: false)
+                            .setCurrentOutputType(
+                                newAnd: expressionType.algebraic);
+                      } else if (i == 1) {
+                        Provider.of<AppState>(context, listen: false)
+                            .setCurrentOutputType(
+                                newOr: expressionType.algebraic);
+                      } else if (i == 2) {
+                        Provider.of<AppState>(context, listen: false)
+                            .setCurrentOutputType(
+                                newNot: expressionType.algebraic);
+                      }
+                    }),
+                MyTableRow(
+                    title: "Logical",
+                    titles: ["^", "ˇ", "¬"],
+                    highlight: highlightRow == 2,
+                    highlights: [
+                      appState.and == expressionType.logical,
+                      appState.or == expressionType.logical,
+                      appState.not == expressionType.logical,
+                    ],
+                    onBigTap: () {
+                      Provider.of<AppState>(context, listen: false)
+                          .setCurrentOutputType(
+                              newAnd: expressionType.logical,
+                              newNot: expressionType.logical,
+                              newOr: expressionType.logical);
+                    },
+                    onSmallTap: (int i) {
+                      if (i == 0) {
+                        Provider.of<AppState>(context, listen: false)
+                            .setCurrentOutputType(
+                                newAnd: expressionType.logical);
+                      } else if (i == 1) {
+                        Provider.of<AppState>(context, listen: false)
+                            .setCurrentOutputType(
+                                newOr: expressionType.logical);
+                      } else if (i == 2) {
+                        Provider.of<AppState>(context, listen: false)
+                            .setCurrentOutputType(
+                                newNot: expressionType.logical);
+                      }
+                    }),
+                MyTableRow(
+                    title: "Programming",
+                    titles: ["&&", "||", "~"],
+                    highlight: highlightRow == 3,
+                    highlights: [
+                      appState.and == expressionType.programming,
+                      appState.or == expressionType.programming,
+                      appState.not == expressionType.programming,
+                    ],
+                    onBigTap: () {
+                      Provider.of<AppState>(context, listen: false)
+                          .setCurrentOutputType(
+                              newAnd: expressionType.programming,
+                              newNot: expressionType.programming,
+                              newOr: expressionType.programming);
+                    },
+                    onSmallTap: (int i) {
+                      if (i == 0) {
+                        Provider.of<AppState>(context, listen: false)
+                            .setCurrentOutputType(
+                                newAnd: expressionType.programming);
+                      } else if (i == 1) {
+                        Provider.of<AppState>(context, listen: false)
+                            .setCurrentOutputType(
+                                newOr: expressionType.programming);
+                      } else if (i == 2) {
+                        Provider.of<AppState>(context, listen: false)
+                            .setCurrentOutputType(
+                                newNot: expressionType.programming);
+                      }
+                    }),
+              ],
+            ),
           ],
         ),
       ),

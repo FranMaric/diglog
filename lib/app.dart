@@ -15,6 +15,17 @@ class App extends StatelessWidget {
           "Boolean function minimizer",
         ),
         centerTitle: true,
+        leading: Builder(
+          builder: (BuildContext context) {
+            return IconButton(
+              icon: Icon(Icons.menu),
+              onPressed: () {
+                Scaffold.of(context).openDrawer();
+              },
+              tooltip: 'Settings',
+            );
+          },
+        ),
       ),
       backgroundColor: Colors.white,
       body: SingleChildScrollView(

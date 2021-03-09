@@ -43,8 +43,29 @@ String statesToExpression(List<int> states, List<String> varNames,
   String expression = "";
   String implicant;
 
-  implicants = implicants.toSet().toList();
-  implicants = implicants.reversed.toList();
+  implicants = implicants.toSet().toList(); //Removes all duoplicates
+
+  List<bool> canMove = List.generate(implicants.length, (i) => true);
+  bool sorted = false;
+  String temp;
+
+  for (int j = 0; j < varNames.length; j++) {
+    while (!sorted) {
+      sorted = true;
+      for (int i = 0; i < implicants.length - 1; i++) {
+        if (canMove[i] == true &&
+            implicants[i + 1][j] != "x" &&
+            implicants[i][j] == "x") {
+          temp = implicants[i];
+          implicants[i] = implicants[i + 1];
+          implicants[i + 1] = temp;
+          sorted = false;
+        }
+      }
+    }
+    for (int i = 0; i < implicants.length; i++)
+      if (implicants[i][j] != "x") canMove[i] = false;
+  }
 
   String and = [" and ", "*", "^", " && "][expressionTypeToIndex[_and]];
   String or = [" or ", "+", "ˇ", " || "][expressionTypeToIndex[_or]];

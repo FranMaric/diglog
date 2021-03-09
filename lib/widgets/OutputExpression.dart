@@ -50,16 +50,19 @@ class OutputExpression extends StatelessWidget {
             height: 55,
             color: Colors.black,
           ),
-          IconButton(
-            icon: Icon(Icons.copy),
-            onPressed: () {
-              Clipboard.setData(ClipboardData(text: expression));
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text('Copied to Clipboard'),
-                ),
-              );
-            },
+          Tooltip(
+            message: "Copy",
+            child: IconButton(
+              icon: Icon(Icons.copy),
+              onPressed: () {
+                Clipboard.setData(ClipboardData(text: expression));
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text('Copied to Clipboard'),
+                  ),
+                );
+              },
+            ),
           )
         ],
       ),

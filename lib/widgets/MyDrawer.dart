@@ -29,8 +29,11 @@ class MyDrawer extends StatelessWidget {
           children: [
             Container(
               padding: EdgeInsets.all(5.0),
-              child: Text(
-                "Customize output:",
+              child: Tooltip(
+                message: "Customize the output to your liking :)",
+                child: Text(
+                  "Customize output:",
+                ),
               ),
             ),
             Table(
@@ -168,6 +171,28 @@ class MyDrawer extends StatelessWidget {
                     }),
               ],
             ),
+            Row(
+              children: [
+                Expanded(
+                  child: Container(
+                    margin: EdgeInsets.symmetric(vertical: 10.0),
+                    height: 1,
+                    color: Colors.grey,
+                  ),
+                ),
+              ],
+            ),
+            ListTile(
+              title: Tooltip(
+                  message: "Add spaces between operators",
+                  child: Text("AddSpaces")),
+              trailing: Switch(
+                value: Provider.of<AppState>(context).addSpaces,
+                onChanged: (bool value) =>
+                    Provider.of<AppState>(context, listen: false)
+                        .setAddSpaces(value),
+              ),
+            )
           ],
         ),
       ),

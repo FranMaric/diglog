@@ -33,6 +33,7 @@ class AppState extends ChangeNotifier {
   String _expression;
   bool _expressionChanged = true;
   String _valid;
+  bool _addSpaces;
 
   typeEnum _inputType = typeEnum.expression;
 
@@ -47,6 +48,7 @@ class AppState extends ChangeNotifier {
   get states => _states;
   get valid => _valid;
   get inputType => _inputType;
+  get addSpaces => _addSpaces;
 
   get and => _and;
   get or => _or;
@@ -72,6 +74,13 @@ class AppState extends ChangeNotifier {
     } catch (e) {
       _not = defaultExpression;
     }
+    try {
+      _addSpaces =
+          CookieManager.getCookie("addSpaces") == "true" ? true : false;
+      if (_not == null) _not = defaultExpression;
+    } catch (e) {
+      _addSpaces = true;
+    }
   }
 
   //Functions
@@ -91,8 +100,8 @@ class AppState extends ChangeNotifier {
     if (_expressionChanged &&
         _expression != "" &&
         _expression.replaceAll(" ", "") != "") {
-      uploadExpression(
-          _expression, statesToExpression(_states, _varNames, _and, _or, _not));
+      uploadExpression(_expression,
+          statesToExpression(_states, _varNames, _and, _or, _not, _addSpaces));
       _expressionChanged = false;
     }
   }
@@ -161,5 +170,13 @@ class AppState extends ChangeNotifier {
       CookieManager.addToCookie("not", enumToString[newNot]);
     }
     notifyListeners();
+  }
+
+  void setAddSpaces(bool newAddSpaces) {
+    if (newAddSpaces != _addSpaces) {
+      _addSpaces = newAddSpaces;
+      CookieManager.addToCookie("addSpaces", _addSpaces.toString());
+      notifyListeners();
+    }
   }
 }

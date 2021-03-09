@@ -18,6 +18,8 @@ class OutputPane extends StatelessWidget {
     expressionType or = appState.or;
     expressionType not = appState.not;
 
+    bool addSpaces = appState.addSpaces;
+
     if (appState.varNames == null ||
         appState.states == null ||
         appState.varNames.length == 0 ||
@@ -30,12 +32,12 @@ class OutputPane extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: OutputExpression(
-            states: appState.states,
-            varNames: appState.varNames,
-            and: and,
-            or: or,
-            not: not,
-          ),
+              states: appState.states,
+              varNames: appState.varNames,
+              and: and,
+              or: or,
+              not: not,
+              addSpaces: addSpaces),
         ),
         Visibility(
           visible: appState.inputType != typeEnum.ktable,

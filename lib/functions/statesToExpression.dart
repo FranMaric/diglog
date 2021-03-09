@@ -8,9 +8,16 @@ const Map<expressionType, int> expressionTypeToIndex = {
   expressionType.programming: 3,
 };
 
-String statesToExpression(List<int> states, List<String> varNames,
-    expressionType _and, expressionType _or, expressionType _not) {
+String statesToExpression(
+  List<int> states,
+  List<String> varNames,
+  expressionType _and,
+  expressionType _or,
+  expressionType _not,
+  bool _addSpaces,
+) {
   int sum = states.fold(0, (p, c) => p + c);
+
   if (sum == states.length)
     return "1";
   else if (sum == 0) return "0";
@@ -67,9 +74,12 @@ String statesToExpression(List<int> states, List<String> varNames,
       if (implicants[i][j] != "x") canMove[i] = false;
   }
 
-  String and = [" and ", "*", "^", " && "][expressionTypeToIndex[_and]];
-  String or = [" or ", "+", "ˇ", " || "][expressionTypeToIndex[_or]];
+  String and = [" and ", "*", "^", "&&"][expressionTypeToIndex[_and]];
+  String or = [" or ", "+", "ˇ", "||"][expressionTypeToIndex[_or]];
   String not = [" not ", "!", "¬", "~"][expressionTypeToIndex[_not]];
+
+  if (_addSpaces && _and != expressionType.literal) and = " " + and + " ";
+  if (_addSpaces && _or != expressionType.literal) or = " " + or + " ";
 
   for (int i = 0; i < implicants.length; i++) {
     implicant = "";

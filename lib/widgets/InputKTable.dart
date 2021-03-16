@@ -93,6 +93,8 @@ class InputKTable extends StatelessWidget {
                   width: x * cellWidth,
                   height: y * cellHeight,
                   child: GridView.count(
+                    physics: NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
                     crossAxisCount: x,
                     children: List.generate(
                       appState.states.length,

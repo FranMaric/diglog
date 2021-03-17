@@ -184,8 +184,8 @@ class MyDrawer extends StatelessWidget {
             ),
             ListTile(
               title: Tooltip(
-                  message: "Add spaces between operators",
-                  child: Text("AddSpaces")),
+                  message: "Adds spaces between operators",
+                  child: Text("Spaces")),
               trailing: Switch(
                 value: Provider.of<AppState>(context).addSpaces,
                 onChanged: (bool value) =>

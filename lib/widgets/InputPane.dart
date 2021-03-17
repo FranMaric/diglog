@@ -17,75 +17,92 @@ class InputPane extends StatefulWidget {
 class _InputPaneState extends State<InputPane> {
   typeEnum inputType = typeEnum.expression; //default input type
 
+  List<Widget> buttons;
+
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SizedBox(height: 10),
-        Row(
-          children: [
-            SizedBox(width: 20),
-            OutlinedButton(
-              onPressed: () {
-                setState(() {
-                  inputType = typeEnum.expression;
-                });
-                Provider.of<AppState>(context, listen: false)
-                    .setCurrentInputType(typeEnum.expression);
-              },
-              child: Text(
-                "Expression",
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: Wrap(
+            direction: Axis.horizontal,
+            crossAxisAlignment: WrapCrossAlignment.center,
+            spacing: 10,
+            children: [
+              OutlinedButton(
+                onPressed: () {
+                  setState(() {
+                    inputType = typeEnum.expression;
+                  });
+                  Provider.of<AppState>(context, listen: false)
+                      .setCurrentInputType(typeEnum.expression);
+                },
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    "Expression",
+                  ),
+                ),
               ),
-            ),
-            SizedBox(width: 10),
-            OutlinedButton(
-              onPressed: () {
-                setState(() {
+              OutlinedButton(
+                onPressed: () {
+                  setState(() {
+                    if (inputType == typeEnum.expression)
+                      Provider.of<AppState>(context, listen: false)
+                          .setDefaultValues();
+                    inputType = typeEnum.ktable;
+                    Provider.of<AppState>(context, listen: false)
+                        .setCurrentInputType(typeEnum.ktable);
+                  });
+                },
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    "KTable",
+                  ),
+                ),
+              ),
+              OutlinedButton(
+                onPressed: () {
+                  setState(() {
+                    if (inputType == typeEnum.expression)
+                      Provider.of<AppState>(context, listen: false)
+                          .setDefaultValues();
+                    inputType = typeEnum.table;
+                    Provider.of<AppState>(context, listen: false)
+                        .setCurrentInputType(typeEnum.table);
+                  });
+                },
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    "Table",
+                  ),
+                ),
+              ),
+              MediaQuery.of(context).size.width > 391
+                  ? Container(width: 1, height: 20, color: Colors.blueGrey)
+                  : Container(),
+              OutlinedButton(
+                onPressed: () {
                   if (inputType == typeEnum.expression)
+                    Provider.of<AppState>(context, listen: false).reset();
+                  else
                     Provider.of<AppState>(context, listen: false)
                         .setDefaultValues();
-                  inputType = typeEnum.ktable;
-                  Provider.of<AppState>(context, listen: false)
-                      .setCurrentInputType(typeEnum.ktable);
-                });
-              },
-              child: Text(
-                "KTable",
+                },
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    "Reset",
+                  ),
+                ),
               ),
-            ),
-            SizedBox(width: 10),
-            OutlinedButton(
-              onPressed: () {
-                setState(() {
-                  if (inputType == typeEnum.expression)
-                    Provider.of<AppState>(context, listen: false)
-                        .setDefaultValues();
-                  inputType = typeEnum.table;
-                  Provider.of<AppState>(context, listen: false)
-                      .setCurrentInputType(typeEnum.table);
-                });
-              },
-              child: Text(
-                "Table",
-              ),
-            ),
-            SizedBox(width: 10),
-            Container(width: 1, height: 20, color: Colors.blueGrey),
-            SizedBox(width: 10),
-            OutlinedButton(
-              onPressed: () {
-                if (inputType == typeEnum.expression)
-                  Provider.of<AppState>(context, listen: false).reset();
-                else
-                  Provider.of<AppState>(context, listen: false)
-                      .setDefaultValues();
-              },
-              child: Text(
-                "Reset",
-              ),
-            ),
-          ],
+            ],
+          ),
         ),
         SizedBox(height: 7),
         (inputType == typeEnum.ktable || inputType == typeEnum.table)

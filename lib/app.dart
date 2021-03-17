@@ -31,7 +31,7 @@ class App extends StatelessWidget {
       body: SingleChildScrollView(
         child: LayoutBuilder(
             builder: (BuildContext context, BoxConstraints constraints) {
-          if (constraints.maxWidth > 680)
+          if (constraints.maxWidth > 782)
             return Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [

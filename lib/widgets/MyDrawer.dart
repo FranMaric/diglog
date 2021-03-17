@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 //Provider
 import 'package:provider/provider.dart';
 import 'package:diglog/services/appState.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class MyDrawer extends StatelessWidget {
   @override
@@ -192,7 +193,20 @@ class MyDrawer extends StatelessWidget {
                     Provider.of<AppState>(context, listen: false)
                         .setAddSpaces(value),
               ),
-            )
+            ),
+            Expanded(
+              child: Container(),
+            ),
+            Padding(
+              padding: EdgeInsets.all(10.0),
+              child: InkWell(
+                onTap: () => launch("https://github.com/FranMaric"),
+                child: Text(
+                  "Made by Fran Marić",
+                  style: TextStyle(color: Colors.blue),
+                ),
+              ),
+            ),
           ],
         ),
       ),

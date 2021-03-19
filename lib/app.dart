@@ -6,6 +6,8 @@ import 'package:diglog/widgets/OutputPane.dart';
 import 'package:diglog/widgets/MyDrawer.dart';
 
 class App extends StatelessWidget {
+  final ScrollController controller = ScrollController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,30 +30,35 @@ class App extends StatelessWidget {
         ),
       ),
       backgroundColor: Colors.white,
-      body: SingleChildScrollView(
-        child: LayoutBuilder(
-            builder: (BuildContext context, BoxConstraints constraints) {
-          if (constraints.maxWidth > 782)
-            return Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Expanded(
-                  child: InputPane(),
-                ),
-                Expanded(
-                  child: OutputPane(),
-                ),
-              ],
-            );
-          else
-            return Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                InputPane(),
-                OutputPane(),
-              ],
-            );
-        }),
+      body: Scrollbar(
+        controller: controller,
+        showTrackOnHover: true,
+        child: SingleChildScrollView(
+          controller: controller,
+          child: LayoutBuilder(
+              builder: (BuildContext context, BoxConstraints constraints) {
+            if (constraints.maxWidth > 782)
+              return Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Expanded(
+                    child: InputPane(),
+                  ),
+                  Expanded(
+                    child: OutputPane(),
+                  ),
+                ],
+              );
+            else
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  InputPane(),
+                  OutputPane(),
+                ],
+              );
+          }),
+        ),
       ),
     );
   }

@@ -7,12 +7,12 @@ const RESOURCES = {
 "assets/FontManifest.json": "7b2a36307916a9721811788013e65289",
 "assets/fonts/MaterialIcons-Regular.otf": "1288c9e28052e028aba623321f7826ac",
 "assets/NOTICES": "73bb5007be25f53685e4db3154905ac0",
-"favicon.png": "5dcef449791fa27946b3d35ad8803796",
+"favicon.png": "e45c857ff7f97f18be171a8d61a5725e",
 "icons/Icon-192.png": "ac9a721a12bbc803b44f645561ecb1e1",
 "icons/Icon-512.png": "96e752610906ba2a93c65f8abe1645f1",
-"index.html": "206bbf6a3804a9906107aeaf00704e03",
-"/": "206bbf6a3804a9906107aeaf00704e03",
-"main.dart.js": "ba565b960117a930c851fcbfe7e39b95",
+"index.html": "60b3a7bcf85c98ecbcfd66796e678291",
+"/": "60b3a7bcf85c98ecbcfd66796e678291",
+"main.dart.js": "1efda8f3e594449a94c84f68979af8d5",
 "manifest.json": "3780ec803ec615cb3ac8b1428b3e49f4",
 "version.json": "6343baa71566f5d3a5479cdb1a1523ff"
 };

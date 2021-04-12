@@ -1,10 +1,11 @@
-import 'package:diglog/widgets/LinkButton.dart';
 import 'package:flutter/material.dart';
 
 //Widgets
 import 'package:diglog/widgets/InputPane.dart';
 import 'package:diglog/widgets/OutputPane.dart';
 import 'package:diglog/widgets/MyDrawer.dart';
+import 'package:diglog/widgets/MyAppBar.dart';
+import 'package:diglog/widgets/LinkButton.dart';
 
 class App extends StatelessWidget {
   final ScrollController controller = ScrollController();
@@ -13,23 +14,7 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: MyDrawer(),
-      appBar: AppBar(
-        title: Text(
-          "Boolean function minimizer",
-        ),
-        centerTitle: true,
-        leading: Builder(
-          builder: (BuildContext context) {
-            return IconButton(
-              icon: Icon(Icons.menu),
-              onPressed: () {
-                Scaffold.of(context).openDrawer();
-              },
-              tooltip: 'Settings',
-            );
-          },
-        ),
-      ),
+      appBar: MyAppBar(),
       backgroundColor: Colors.white,
       body: Scrollbar(
         controller: controller,

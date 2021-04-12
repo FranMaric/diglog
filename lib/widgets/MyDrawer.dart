@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+//Widgets
+import 'package:diglog/widgets/LinkButton.dart';
+
 //Provider
 import 'package:provider/provider.dart';
 import 'package:diglog/services/appState.dart';
@@ -197,15 +200,9 @@ class MyDrawer extends StatelessWidget {
             Expanded(
               child: Container(),
             ),
-            Padding(
-              padding: EdgeInsets.all(10.0),
-              child: InkWell(
-                onTap: () => launch("https://github.com/FranMaric"),
-                child: Text(
-                  "Made by Fran Marić",
-                  style: TextStyle(color: Colors.blue),
-                ),
-              ),
+            LinkButton(
+              text: "Made by Fran Marić",
+              url: "https://github.com/FranMaric",
             ),
           ],
         ),

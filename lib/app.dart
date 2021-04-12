@@ -52,7 +52,7 @@ class App extends StatelessWidget {
               bottom: 10,
               right: 10,
               child: LinkButton(
-                text: "Report issue",
+                text: "Report an issue || Request a feature",
                 url: "https://github.com/FranMaric/diglog/issues/new",
               ),
             )

@@ -1,3 +1,4 @@
+import 'package:diglog/widgets/LinkButton.dart';
 import 'package:flutter/material.dart';
 
 //Widgets
@@ -33,31 +34,44 @@ class App extends StatelessWidget {
       body: Scrollbar(
         controller: controller,
         showTrackOnHover: true,
-        child: SingleChildScrollView(
-          controller: controller,
-          child: LayoutBuilder(
-              builder: (BuildContext context, BoxConstraints constraints) {
-            if (constraints.maxWidth > 782)
-              return Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Expanded(
-                    child: InputPane(),
-                  ),
-                  Expanded(
-                    child: OutputPane(),
-                  ),
-                ],
-              );
-            else
-              return Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  InputPane(),
-                  OutputPane(),
-                ],
-              );
-          }),
+        child: Stack(
+          fit: StackFit.expand,
+          children: [
+            SingleChildScrollView(
+              controller: controller,
+              child: LayoutBuilder(
+                  builder: (BuildContext context, BoxConstraints constraints) {
+                if (constraints.maxWidth > 782)
+                  return Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Expanded(
+                        child: InputPane(),
+                      ),
+                      Expanded(
+                        child: OutputPane(),
+                      ),
+                    ],
+                  );
+                else
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      InputPane(),
+                      OutputPane(),
+                    ],
+                  );
+              }),
+            ),
+            Positioned(
+              bottom: 10,
+              right: 10,
+              child: LinkButton(
+                text: "Report issue",
+                url: "https://github.com/FranMaric/diglog/issues/new",
+              ),
+            )
+          ],
         ),
       ),
     );

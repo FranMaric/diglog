@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 //Widgets
 import 'package:diglog/widgets/LinkButton.dart';
+import 'package:diglog/widgets/SolvedCounter.dart';
 
 //Provider
 import 'package:provider/provider.dart';
@@ -199,6 +200,7 @@ class MyDrawer extends StatelessWidget {
             Expanded(
               child: Container(),
             ),
+            SolvedCounter(),
             LinkButton(
               text: "Made by Fran Marić",
               url: "https://github.com/FranMaric",

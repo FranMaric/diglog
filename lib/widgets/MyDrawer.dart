@@ -6,7 +6,6 @@ import 'package:diglog/widgets/LinkButton.dart';
 //Provider
 import 'package:provider/provider.dart';
 import 'package:diglog/services/appState.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class MyDrawer extends StatelessWidget {
   @override
